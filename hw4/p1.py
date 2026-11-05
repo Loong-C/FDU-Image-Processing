@@ -63,7 +63,6 @@ def main():
         np.clip(sharpened, 0, 255).astype(np.uint8)
     )
     fig, axes = plt.subplots(2, 4, figsize=(16, 8))
-
     results = [
         ("Smoothing", smoothed, img_freq, filtered_freq),
         ("Sharpening", sharpened, img_freq_sharp, filtered_freq_sharp)
