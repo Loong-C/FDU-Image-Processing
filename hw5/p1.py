@@ -25,24 +25,37 @@ def main():
     brain_img = Image.open('img/brain.png').convert('L')
     heart_array = np.array(heart_img)
     brain_array = np.array(brain_img)
-    white_noise_heart = unif_white_noise(heart_array, 50)
-    white_noise_brain = unif_white_noise(brain_array, 50)
-    salt_pepper_heart = salt_pepper_noise(heart_array, 0.05)
-    salt_pepper_brain = salt_pepper_noise(brain_array, 0.05)
-    fig, axes = plt.subplots(3, 2, figsize=(10, 12))
+    white_heart_20 = unif_white_noise(heart_array, 20)
+    white_brain_20 = unif_white_noise(brain_array, 20)
+    white_heart_50 = unif_white_noise(heart_array, 50)
+    white_brain_50 = unif_white_noise(brain_array, 50)
+
+    sp_heart_01 = salt_pepper_noise(heart_array, 0.01)
+    sp_brain_01 = salt_pepper_noise(brain_array, 0.01)
+    sp_heart_05 = salt_pepper_noise(heart_array, 0.05)
+    sp_brain_05 = salt_pepper_noise(brain_array, 0.05)
+    fig, axes = plt.subplots(2, 5, figsize=(20, 8))
     axes = axes.ravel()
+
     items = [
-        (heart_array,          'Original Heart Image'),
-        (brain_array,          'Original Brain Image'),
-        (white_noise_heart,    'Heart with Uniform White Noise'),
-        (white_noise_brain,    'Brain with Uniform White Noise'),
-        (salt_pepper_heart,    'Heart with Salt & Pepper Noise'),
-        (salt_pepper_brain,    'Brain with Salt & Pepper Noise'),
+        (heart_array,    'Original'),
+        (white_heart_20, 'White Noise A=20'),
+        (white_heart_50, 'White Noise A=50'),
+        (sp_heart_01,    'Salt & Pepper p=0.01'),
+        (sp_heart_05,    'Salt & Pepper p=0.05'),
+
+        (brain_array,    'Original'),
+        (white_brain_20, 'White Noise A=20'),
+        (white_brain_50, 'White Noise A=50'),
+        (sp_brain_01,    'Salt & Pepper p=0.01'),
+        (sp_brain_05,    'Salt & Pepper p=0.05'),
     ]
+
     for ax, (data, title) in zip(axes, items):
         ax.imshow(data, cmap='gray')
         ax.set_title(title)
         ax.axis('off')
+
     plt.tight_layout()
     plt.show()
 
